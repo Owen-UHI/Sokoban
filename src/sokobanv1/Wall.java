@@ -8,6 +8,11 @@ package sokobanv1;
  *
  * @author Owen
  */
-public class Wall {
+public class Wall extends MapElement{
+
+    public Wall() {
+        setSymbol ("W");
+        setImgFileName ("/graphics/SokobanImages/Wall.png");
+    }
     
 }

@@ -8,6 +8,11 @@ package sokobanv1;
  *
  * @author Owen
  */
-public class Crate {
+public class Crate extends MapElement {
+
+    public Crate() {
+        setSymbol ("C");
+        setImgFileName ("/graphics/SokobanImages/Crate.png");
+    }
     
 }

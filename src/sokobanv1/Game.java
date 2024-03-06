@@ -8,12 +8,15 @@ package sokobanv1;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JLabel;
-
+import java.util.HashMap;
+import javax.swing.ImageIcon;
 
 public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 on final vid: https://brightspace.uhi.ac.uk/d2l/le/content/374391/viewContent/3389172/View
 
     private JLabel [][] myElements = new JLabel[12][12];
     private Map tmpMap;
+    private HashMap<String, ImageIcon> imageHashMap;
+    
     
     public Game() {
         initComponents();
@@ -31,6 +34,15 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
         drawMap();
     }
 
+    
+    public ImageIcon getImage(String filename){
+        
+        
+        return null;
+    }
+    
+    
+    
     private void drawMap(){
         for (int i = 0; i < myElements.length; i++) {
             for (int j = 0; j < myElements.length; j++) {
@@ -38,6 +50,9 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
             } 
         }
      }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

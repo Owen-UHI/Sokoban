@@ -8,6 +8,10 @@ package sokobanv1;
  *
  * @author Owen
  */
-public class Diamond {
+public class Diamond extends MapElement{
+    Diamond (){
+        setSymbol ("D");
+        setImgFileName ("/graphics/SokobanImages/Diamond.png");
+    }
     
 }
