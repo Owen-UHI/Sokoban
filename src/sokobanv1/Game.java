@@ -25,6 +25,7 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
                 myElements[i][j] = new JLabel();
                 //myElements[i][j].setText(".");
                 pnl_game.add(myElements[i][j]);
+                
             }
             
         }
@@ -35,11 +36,27 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
     }
 
     
+   // public void getImageFileName(){
+   // String filename = MapElement.getImgFileName();
+    
+    //}
+    
+    
     public ImageIcon getImage(String filename){
-        
+        //filename = MapElement.getImgFileName();
+        //use mapelements display thingy here with the file path specified as variable filename
         
         return null;
     }
+
+    public HashMap<String, ImageIcon> getImageHashMap() {
+        return imageHashMap;
+    }
+
+ 
+    
+
+    
     
     
     
@@ -47,6 +64,12 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
         for (int i = 0; i < myElements.length; i++) {
             for (int j = 0; j < myElements.length; j++) {
                 myElements[i][j].setText(tmpMap.getMyMap()[i][j].getSymbol());
+                //maybe put really big if statement in here (ie, if symbol = f, set image icon for floor
+                
+                
+                
+                //myElements[i][j].setIcon(tmpMap.getMyMap()[i][j].new ImageIcon(getClass().getResource(MapElement.getImgFileName)));
+                //myElements[i][j].setIcon(new ImageIcon(getClass().getResource(getImgFileName())));
             } 
         }
      }

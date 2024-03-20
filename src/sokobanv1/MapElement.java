@@ -9,6 +9,17 @@ package sokobanv1;
 public class MapElement {
     private String symbol;
     private String imgFileName;
+    private boolean canBePushed;
+    private boolean isDestination; //this is relating to the diamonds that the crates have to go to
+    private boolean obs;
+    private int x;
+    private int y;
+    private MapElement underneath;
+    
+    
+    
+    
+    
 
     public String getSymbol() {
         return symbol;
@@ -26,4 +37,7 @@ public class MapElement {
         this.imgFileName = imgFileName;
     }
     
+
+
+
 }

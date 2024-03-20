@@ -15,7 +15,7 @@ public class Map {
     Map(){
         for (int i = 0; i < myMap.length; i++) {
             for (int j = 0; j < myMap.length; j++) {
-                myMap[i][j] = new Floor(); //put case/ifelse statement here to determine what goes where, ie if character = f, put floor etc. Reader would be better maybe?
+                myMap[i][j] = new Floor(); //put case/ifelse statement here to determine what goes where, ie if character = f, put floor etc. Reader would be implemented for the maps, and goes here.?
             }
             
         }
