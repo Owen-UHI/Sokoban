@@ -13,6 +13,8 @@ public class Wall extends MapElement{
     public Wall() {
         setSymbol ("W");
         setImgFileName ("/graphics/SokobanImages/Wall.png");
+        setObs  (true);
+        setCanBePushed (false);
     }
     
 }

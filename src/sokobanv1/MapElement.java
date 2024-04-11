@@ -15,6 +15,40 @@ public class MapElement {
     private int x;
     private int y;
     private MapElement underneath;
+
+    
+    
+    public boolean isCanBePushed() {
+        return canBePushed;
+    }
+
+    public void setCanBePushed(boolean canBePushed) {
+        this.canBePushed = canBePushed;
+    }
+
+    public boolean isIsDestination() {
+        return isDestination;
+    }
+
+    public void setIsDestination(boolean isDestination) {
+        this.isDestination = isDestination;
+    }
+
+    public boolean isObs() {
+        return obs;
+    }
+
+    public void setObs(boolean obs) {
+        this.obs = obs;
+    }
+
+    public MapElement getUnderneath() {
+        return underneath;
+    }
+
+    public void setUnderneath(MapElement underneath) {
+        this.underneath = underneath;
+    }
     
     
     

@@ -63,12 +63,12 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
     private void drawMap(){
         for (int i = 0; i < myElements.length; i++) {
             for (int j = 0; j < myElements.length; j++) {
-                myElements[i][j].setText(tmpMap.getMyMap()[i][j].getSymbol());
+                //myElements[i][j].setText(tmpMap.getMyMap()[i][j].getSymbol());
                 //maybe put really big if statement in here (ie, if symbol = f, set image icon for floor
+                myElements[i][j].setIcon(new ImageIcon(getClass().getResource(tmpMap.getMyMap()[i][j].getImgFileName())));
                 
                 
-                
-                //myElements[i][j].setIcon(tmpMap.getMyMap()[i][j].new ImageIcon(getClass().getResource(MapElement.getImgFileName)));
+               // myElements[i][j].setIcon(tmpMap.getMyMap()[i][j].new ImageIcon(getClass().getResource(Map.getImgFileName)));
                 //myElements[i][j].setIcon(new ImageIcon(getClass().getResource(getImgFileName())));
             } 
         }
@@ -101,8 +101,8 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
             pnl_statusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_statusLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbl_output, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addComponent(lbl_output, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(225, Short.MAX_VALUE))
         );
         pnl_statusLayout.setVerticalGroup(
             pnl_statusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

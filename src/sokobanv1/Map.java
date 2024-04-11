@@ -10,20 +10,41 @@ public class Map {
     
     MapElement[][] myMap = new MapElement[12][12];
     int playerRow = 4, playerCol = 5;
+    int crateRow = 7,crateCol = 8;
     
     
     Map(){
         for (int i = 0; i < myMap.length; i++) {
             for (int j = 0; j < myMap.length; j++) {
+                
+                if (i==0 || i== (myMap.length - 1) || j==0 || j== (myMap.length - 1)) {
+                
+                    myMap[i][j] = new Wall();
+                }
+                else {
                 myMap[i][j] = new Floor(); //put case/ifelse statement here to determine what goes where, ie if character = f, put floor etc. Reader would be implemented for the maps, and goes here.?
-            }
+                }
+              }
             
         }
         myMap[playerRow][playerCol] = new Player();
+        myMap[crateRow][crateCol] = new Crate();
     }
     public MapElement[][] getMyMap() {
         return myMap;
     }
+    
+    public void isObstacleAhead(int x, int y){
+    
+    
+    }
+    
+    
+    public void isPushableObject(int x, int y){
+    
+    
+    }
+    
     
     public void movePlayer(int dir){
         if (dir ==1){
