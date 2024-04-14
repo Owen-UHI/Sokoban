@@ -13,6 +13,8 @@ public class Crate extends MapElement {
     public Crate() {
         setSymbol ("C");
         setImgFileName ("/graphics/SokobanImages/Crate.png");
+        setObs  (true);
+        setCanBePushed (true);
     }
     
 }
