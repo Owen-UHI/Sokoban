@@ -166,6 +166,7 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
 
     @Override
     public void keyPressed(KeyEvent e) {
+        
         if(e.getKeyChar() == 'w' || e.getKeyCode() == KeyEvent.VK_UP){
             tmpMap.movePlayer(1);
             lbl_output.setText("You pressed up");
@@ -178,8 +179,14 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
         } else if (e.getKeyChar() == 'd'|| e.getKeyCode() == KeyEvent.VK_RIGHT) {
             tmpMap.movePlayer(4);
             lbl_output.setText("You pressed Right");
-        }  
-        
+        }  else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            tmpMap.resetMap();
+        }
+        tmpMap.checkForWin();
+        boolean hasWon = tmpMap.checkForWin();
+        if(hasWon != false){
+            lbl_output.setText("You have Won!");
+        }
         
         drawMap();
     }
