@@ -36,10 +36,6 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
     }
 
     
-   // public void getImageFileName(){
-   // String filename = MapElement.getImgFileName();
-    
-    //}
     
     
     public ImageIcon getImage(String filename){
