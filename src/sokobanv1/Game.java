@@ -82,8 +82,10 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
                 
                 //myElements[i][j].setIcon(new ImageIcon(getClass().getResource(tmpMap.getMyMap()[i][j].getImgFileName())));
                
-                populateHashMap(tmpMap.getMyMap()[i][j].getImgFileName());
-                myElements[i][j].setIcon(imageHashMap.get(tmpMap.getMyMap()[i][j].getImgFileName()));
+                if(tmpMap.getMyMap()[i][j] != null){
+                    populateHashMap(tmpMap.getMyMap()[i][j].getImgFileName());
+                    myElements[i][j].setIcon(imageHashMap.get(tmpMap.getMyMap()[i][j].getImgFileName()));
+                }
 
                 //use if hashmap contains tmpmap.getmymap()[i][j].getImgFileName() to determine whether or not the image is in the hashmap, then see if that works. 
                 //might just be worth manually populating the hashmap now that I think about it

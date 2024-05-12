@@ -5,16 +5,21 @@
  */
 package sokobanv1;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public class Map {
 
     MapElement[][] myMap = new MapElement[12][12];
-    int playerRow = 4, playerCol = 5;
-    //int crate1Row = 7, crate1Col = 8;
-    //int crate2Row = 4, crate2Col = 10;
-
+    int playerRow, playerCol;
+    int level = 1; //this will be ammended when loading through the levels, however it will also be used in a switch case statement to select maps
+    
     Map() {
-        resetMap();
-
+        //resetMap();
+        
+        
+        readMap();
         // for (int i = 0; i < myMap.length; i++) {
         //   for (int j = 0; j < myMap.length; j++) {
         //     if (i == 0 || i == (myMap.length - 1) || j == 0 || j == (myMap.length - 1)) {
@@ -37,6 +42,18 @@ public class Map {
         //myMap[3][4].setUnderneath(new Floor());
     }
 
+    
+    
+    
+    
+   
+    
+    
+    
+    
+    
+    
+    
     public MapElement[][] getMyMap() {
         return myMap;
     }
@@ -178,6 +195,49 @@ public class Map {
         //checkForWin();
 
     }
+    
+     public final void readMap(){
+        switch(level){
+            case 1: {
+                InputStreamReader fileReader = new InputStreamReader(getClass().getResourceAsStream("/SokobanMaps/level1.txt"));
+                BufferedReader bufferReader = new BufferedReader(fileReader);
+                String line;
+                int i=0;
+        
+                try {
+                    while((line = bufferReader.readLine())!=null){
+                        for(int j = 0; j<line.length();j++){
+                            //for(int j = 0; j<line.length();j++){
+                                if(line.substring(j,j+1).equals("X")){
+                                    myMap[i][j] = new Wall();
+                                } else if(line.substring(j,j+1).equals("*")){
+                                    myMap[i][j] = new Crate();
+                                    myMap[i][j].setUnderneath(new Floor());
+                                } else if (line.substring(j,j+1).equals(" ")){
+                                    myMap[i][j] = new Floor();
+                                } else if(line.substring(j,j+1).equals("@")){
+                                    myMap[i][j] = new Player();
+                                    myMap[i][j].setUnderneath(new Floor());
+                                    playerRow=i;
+                                    playerCol=j;
+                                } else if(line.substring(j,j+1).equals(".")){
+                                    myMap[i][j] = new Diamond();
+                                    myMap[i][j].setUnderneath(new Floor());
+                                } else {
+                                    myMap[i][j] = new Wall();
+                                }
+                            //}
+                        }
+                        i++;
+                    }
+            
+                } catch(IOException e){System.out.println("Something is wrong");}
+            }
+        
+        }
+    }
+    
+    
 
     public final void resetMap() {
         playerRow = 4;
