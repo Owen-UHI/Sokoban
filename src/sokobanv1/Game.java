@@ -20,6 +20,7 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
     
     public Game() {
         initComponents();
+        imageHashMap = new HashMap<>();
         for (int i = 0; i < myElements.length; i++) { //When working with graphics, use myElements
             for (int j = 0; j < myElements.length; j++) {
                 myElements[i][j] = new JLabel();
@@ -42,6 +43,8 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
         //filename = MapElement.getImgFileName();
         //use mapelements display thingy here with the file path specified as variable filename
         
+        
+        //myElements[][]
         return null;
     }
 
@@ -49,7 +52,22 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
         return imageHashMap;
     }
 
- 
+    //public void setImageHashMap(HashMap<String, ImageIcon> imageHashMap) {
+      //  this.imageHashMap = imageHashMap;
+    //}
+
+    public void populateHashMap(String filepath){
+        if (imageHashMap.containsKey(filepath)){
+            //lbl_output2.setText("Image already in memory");
+        } else {
+            //imageHashMap.put(filepath, new ImageIcon((getClass().getResource(tmpMap.getMyMap()[i][j].getImgFileName()))));
+            imageHashMap.put(filepath, new ImageIcon(getClass().getResource(filepath)));
+            //lbl_output2.setText("Image added to memory");
+        }
+    
+    }
+    
+    
     
 
     
@@ -61,11 +79,22 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
             for (int j = 0; j < myElements.length; j++) {
                 //myElements[i][j].setText(tmpMap.getMyMap()[i][j].getSymbol());
                 //maybe put really big if statement in here (ie, if symbol = f, set image icon for floor
-                myElements[i][j].setIcon(new ImageIcon(getClass().getResource(tmpMap.getMyMap()[i][j].getImgFileName())));
                 
-                
+                //myElements[i][j].setIcon(new ImageIcon(getClass().getResource(tmpMap.getMyMap()[i][j].getImgFileName())));
+               
+                populateHashMap(tmpMap.getMyMap()[i][j].getImgFileName());
+                myElements[i][j].setIcon(imageHashMap.get(tmpMap.getMyMap()[i][j].getImgFileName()));
+
+                //use if hashmap contains tmpmap.getmymap()[i][j].getImgFileName() to determine whether or not the image is in the hashmap, then see if that works. 
+                //might just be worth manually populating the hashmap now that I think about it
+                //myElements[i][j].setIcon(imageHashMap.get(j));
+                //use getImage to do this
                // myElements[i][j].setIcon(tmpMap.getMyMap()[i][j].new ImageIcon(getClass().getResource(Map.getImgFileName)));
                 //myElements[i][j].setIcon(new ImageIcon(getClass().getResource(getImgFileName())));
+                
+                //call populate hashmap here and pass through tmpMap.getMyMap()[i][j].getImgFileName as the filepath
+                
+                
             } 
         }
      }
@@ -83,13 +112,16 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
 
         pnl_status = new javax.swing.JPanel();
         lbl_output = new javax.swing.JLabel();
+        lbl_output2 = new javax.swing.JLabel();
         pnl_game = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         pnl_status.setPreferredSize(new java.awt.Dimension(400, 30));
 
-        lbl_output.setText("jLabel1");
+        lbl_output.setText("Movement and victory info here");
+
+        lbl_output2.setText("Hashmap info here");
 
         javax.swing.GroupLayout pnl_statusLayout = new javax.swing.GroupLayout(pnl_status);
         pnl_status.setLayout(pnl_statusLayout);
@@ -98,12 +130,18 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
             .addGroup(pnl_statusLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lbl_output, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(225, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addComponent(lbl_output2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(64, 64, 64))
         );
         pnl_statusLayout.setVerticalGroup(
             pnl_statusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_statusLayout.createSequentialGroup()
-                .addComponent(lbl_output, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)
+                .addGroup(pnl_statusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_output, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)
+                    .addGroup(pnl_statusLayout.createSequentialGroup()
+                        .addComponent(lbl_output2)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -153,6 +191,7 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lbl_output;
+    private javax.swing.JLabel lbl_output2;
     private javax.swing.JPanel pnl_game;
     private javax.swing.JPanel pnl_status;
     // End of variables declaration//GEN-END:variables
