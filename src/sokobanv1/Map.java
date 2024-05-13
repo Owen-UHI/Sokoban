@@ -14,11 +14,10 @@ public class Map {
     MapElement[][] myMap = new MapElement[12][12];
     int playerRow, playerCol;
     int level = 1; //this will be ammended when loading through the levels, however it will also be used in a switch case statement to select maps
-    
+
     Map() {
         //resetMap();
-        
-        
+
         readMap();
         // for (int i = 0; i < myMap.length; i++) {
         //   for (int j = 0; j < myMap.length; j++) {
@@ -42,18 +41,6 @@ public class Map {
         //myMap[3][4].setUnderneath(new Floor());
     }
 
-    
-    
-    
-    
-   
-    
-    
-    
-    
-    
-    
-    
     public MapElement[][] getMyMap() {
         return myMap;
     }
@@ -192,52 +179,53 @@ public class Map {
             //this is if the movable object is not on a destination square
             myMap[newX][newY].setImgFileName("/graphics/SokobanImages/Crate.png");
         }
-        //checkForWin();
+        //boolean complete = checkForWin();
 
     }
-    
-     public final void readMap(){
-        switch(level){
+
+    public final void readMap() {
+        switch (level) {
             case 1: {
                 InputStreamReader fileReader = new InputStreamReader(getClass().getResourceAsStream("/SokobanMaps/level1.txt"));
                 BufferedReader bufferReader = new BufferedReader(fileReader);
                 String line;
-                int i=0;
-        
+                int i = 0;
+
                 try {
-                    while((line = bufferReader.readLine())!=null){
-                        for(int j = 0; j<line.length();j++){
+
+                    while ((line = bufferReader.readLine()) != null) {
+                        for (int j = 0; j < line.length(); j++) {
                             //for(int j = 0; j<line.length();j++){
-                                if(line.substring(j,j+1).equals("X")){
-                                    myMap[i][j] = new Wall();
-                                } else if(line.substring(j,j+1).equals("*")){
-                                    myMap[i][j] = new Crate();
-                                    myMap[i][j].setUnderneath(new Floor());
-                                } else if (line.substring(j,j+1).equals(" ")){
-                                    myMap[i][j] = new Floor();
-                                } else if(line.substring(j,j+1).equals("@")){
-                                    myMap[i][j] = new Player();
-                                    myMap[i][j].setUnderneath(new Floor());
-                                    playerRow=i;
-                                    playerCol=j;
-                                } else if(line.substring(j,j+1).equals(".")){
-                                    myMap[i][j] = new Diamond();
-                                    myMap[i][j].setUnderneath(new Floor());
-                                } else {
-                                    myMap[i][j] = new Wall();
-                                }
+                            if (line.substring(j, j + 1).equals("X")) {
+                                myMap[i][j] = new Wall();
+                            } else if (line.substring(j, j + 1).equals("*")) {
+                                myMap[i][j] = new Crate();
+                                myMap[i][j].setUnderneath(new Floor());
+                            } else if (line.substring(j, j + 1).equals(" ")) {
+                                myMap[i][j] = new Floor();
+                            } else if (line.substring(j, j + 1).equals("@")) {
+                                myMap[i][j] = new Player();
+                                myMap[i][j].setUnderneath(new Floor());
+                                playerRow = i;
+                                playerCol = j;
+                            } else if (line.substring(j, j + 1).equals(".")) {
+                                myMap[i][j] = new Diamond();
+                                //myMap[i][j].setUnderneath(new Floor());
+                            } else {
+                                myMap[i][j] = new Wall();
+                            }
                             //}
                         }
                         i++;
                     }
-            
-                } catch(IOException e){System.out.println("Something is wrong");}
+
+                } catch (IOException e) {
+                    System.out.println("ERROR: Map not read");
+                }
             }
-        
+
         }
     }
-    
-    
 
     public final void resetMap() {
         playerRow = 4;
@@ -267,9 +255,7 @@ public class Map {
         myMap[5][9] = new Diamond();
         myMap[4][2] = new Diamond();
         myMap[5][5] = new Wall();
-        
-        
-        
+
     }
 
     public boolean checkForWin() {
@@ -277,16 +263,23 @@ public class Map {
         MapElement tempUnderneath;
 
         for (MapElement[] myMap1 : myMap) {
+
             for (int j = 0; j < myMap.length; j++) {
+                //System.out.println("Before underneath");
                 tempCheck = myMap1[j];
-                tempUnderneath = myMap1[j].getUnderneath();
-                if (tempCheck.isCanBePushed() && !tempUnderneath.isIsDestination()) {
-                    return false;
+                if (tempCheck != null) {
+                    tempUnderneath = myMap1[j].getUnderneath();
+                    if (tempCheck.isCanBePushed() && !tempUnderneath.isIsDestination()) {
+                        return false;
+                    } //else {
+                    // System.out.println("After checkforwin if else");
+                    //  return true;
+
+                    //}
                 }
-
             }
-        }
-        return true;
+            }
+            return true;
 
+        }
     }
-}

@@ -15,6 +15,7 @@ public class Crate extends MapElement {
         setImgFileName ("/graphics/SokobanImages/Crate.png");
         setObs  (true);
         setCanBePushed (true);
+        //setUnderneath(new Floor());
     }
     
 }

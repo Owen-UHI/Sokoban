@@ -10,6 +10,7 @@ public class Floor extends MapElement {
     Floor(){
         setSymbol ("F");
         setImgFileName ("/graphics/SokobanImages/Floor.png");
+        //setUnderneath(new Floor());
     }
     
 }

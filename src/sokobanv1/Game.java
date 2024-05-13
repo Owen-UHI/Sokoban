@@ -16,7 +16,7 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
     private JLabel [][] myElements = new JLabel[12][12];
     private Map tmpMap;
     private HashMap<String, ImageIcon> imageHashMap;
-    
+    //boolean hasWon = false;
     
     public Game() {
         initComponents();
@@ -87,14 +87,7 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
                     myElements[i][j].setIcon(imageHashMap.get(tmpMap.getMyMap()[i][j].getImgFileName()));
                 }
 
-                //use if hashmap contains tmpmap.getmymap()[i][j].getImgFileName() to determine whether or not the image is in the hashmap, then see if that works. 
-                //might just be worth manually populating the hashmap now that I think about it
-                //myElements[i][j].setIcon(imageHashMap.get(j));
-                //use getImage to do this
-               // myElements[i][j].setIcon(tmpMap.getMyMap()[i][j].new ImageIcon(getClass().getResource(Map.getImgFileName)));
-                //myElements[i][j].setIcon(new ImageIcon(getClass().getResource(getImgFileName())));
-                
-                //call populate hashmap here and pass through tmpMap.getMyMap()[i][j].getImgFileName as the filepath
+               
                 
                 
             } 
@@ -219,13 +212,20 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
         }  else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             tmpMap.resetMap();
         }
-        tmpMap.checkForWin();
-        boolean hasWon = tmpMap.checkForWin();
-        if(hasWon != false){
-            lbl_output.setText("You have Won!");
-        }
+        //tmpMap.checkForWin();
+        //boolean hasWon = tmpMap.checkForWin();
+        //System.out.println(hasWon);
+        //if(hasWon != false){
+          //  lbl_output.setText("You have Won!");
+        //}
         
         drawMap();
+        
+        System.out.println(tmpMap.checkForWin());
+
+        if (tmpMap.checkForWin()){
+            lbl_output.setText("You have won!");
+        }
     }
 
     @Override

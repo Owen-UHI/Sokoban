@@ -13,6 +13,7 @@ public class Diamond extends MapElement{
         setSymbol ("D");
         setImgFileName ("/graphics/SokobanImages/Diamond.png");
         setIsDestination(true);
+        //setUnderneath(new Floor());
     }
     
 }
