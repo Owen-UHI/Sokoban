@@ -168,19 +168,17 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
             pnl_statusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_statusLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbl_output, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addComponent(lbl_output, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(lbl_output2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64))
+                .addContainerGap())
         );
         pnl_statusLayout.setVerticalGroup(
             pnl_statusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_statusLayout.createSequentialGroup()
-                .addGroup(pnl_statusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnl_statusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_output, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)
-                    .addGroup(pnl_statusLayout.createSequentialGroup()
-                        .addComponent(lbl_output2)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(lbl_output2))
                 .addContainerGap())
         );
 
@@ -252,19 +250,31 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
         levelComplete = tmpMap.checkForWin();
         
         if(e.getKeyChar() == 'w' || e.getKeyCode() == KeyEvent.VK_UP){
-            tmpMap.movePlayer(1);
-            lbl_output.setText("You pressed up");
+             if(levelComplete != false){
+                tmpMap.readMap(getMapNames()[level]);
+            } else {
+                tmpMap.movePlayer(1);
+                lbl_output.setText("You pressed up");}
         } else if (e.getKeyChar() == 's'|| e.getKeyCode() == KeyEvent.VK_DOWN) {
+                 if(levelComplete != false){
+                     tmpMap.readMap(getMapNames()[level]);
+            } else {
                 tmpMap.movePlayer(2);
-                lbl_output.setText("You pressed down");
+                lbl_output.setText("You pressed down");}
         } else if (e.getKeyChar() == 'a'|| e.getKeyCode() == KeyEvent.VK_LEFT) {
-            tmpMap.movePlayer(3);
-            lbl_output.setText("You pressed left");
+             if(levelComplete != false){
+                tmpMap.readMap(getMapNames()[level]);
+            } else {
+                tmpMap.movePlayer(3);
+                lbl_output.setText("You pressed left");}
         } else if (e.getKeyChar() == 'd'|| e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            tmpMap.movePlayer(4);
-            lbl_output.setText("You pressed Right");
+             if(levelComplete != false){
+                tmpMap.readMap(getMapNames()[level]);
+            } else {
+                tmpMap.movePlayer(4);
+                lbl_output.setText("You pressed Right");}
         }  else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            if(levelComplete = true){
+            if(levelComplete != false){
                 tmpMap.readMap(getMapNames()[level]);
             } else{
                 tmpMap.resetMap(getMapNames()[level]);
@@ -274,7 +284,7 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
         //boolean hasWon = tmpMap.checkForWin();
         //System.out.println(hasWon);
          if (tmpMap.checkForWin()){
-            lbl_output.setText("You have won!");
+            lbl_output.setText("You have won this level! Please press spacebar for next level");
             //levelComplete = true;
             level++;
                 if(level == getMapNames().length){
