@@ -1,6 +1,5 @@
 /*
  * 21005686
- * Owen Ross
  * Object Oriented Programming
  */
 package sokobanv1;
@@ -11,21 +10,16 @@ import java.io.InputStreamReader;
 
 /**
  *
- * @author Owen
+ * @author Owen Ross
  */
 public class Map {
 
     MapElement[][] myMap = new MapElement[12][12];
     int playerRow, playerCol;
     //int level = 1; //this will be ammended when loading through the levels, however it will also be used in a switch case statement to select maps
-    
-    
-    
-    
-    Map(String mapNames) {
-               
+       
+    Map(String mapNames) {            
         readMap(mapNames);
-      
     }
 
     /**
@@ -255,7 +249,7 @@ public class Map {
      * @param mapName
      */
     public final void resetMap(String mapName) {
-        
+        readMap(mapName);
     }
 
     /**

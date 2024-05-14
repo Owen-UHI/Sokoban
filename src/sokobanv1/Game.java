@@ -1,6 +1,5 @@
 /*
  * 21005686
- * Owen Ross
  * Object Oriented Programming
  */
 package sokobanv1;
@@ -13,7 +12,7 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author Owen
+ * @author Owen Ross
  */
 public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 on final vid: https://brightspace.uhi.ac.uk/d2l/le/content/374391/viewContent/3389172/View
 
@@ -26,7 +25,7 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
     private String[] mapNames = {"/SokobanMaps/level1.txt", "/SokobanMaps/level2.txt", "/SokobanMaps/level3.txt", "/SokobanMaps/level4.txt", "/SokobanMaps/level5.txt"};
 
     /**
-     *
+     *  This starts a new instance of the game, initialising the graphical representation of the game, handling the user input, tracking the level the user is on and holding the mapNames array, which is the filenames of the maps
      */
     public Game() {
         initComponents();
@@ -55,7 +54,7 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
 
     /**
      *
-     * @return
+     * @return mapNames array
      */
     public String[] getMapNames() {
         return mapNames;
@@ -74,18 +73,11 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
      * @param filename
      * @return
      */
-    public ImageIcon getImage(String filename){
-        //filename = MapElement.getImgFileName();
-        //use mapelements display thingy here with the file path specified as variable filename
-        
-        
-        //myElements[][]
-        return null;
-    }
+   
 
     /**
      *
-     * @return
+     * @return imageHashMap. This acts as the getter for the hashmap, allowing methods to populate it and access its contents
      */
     public HashMap<String, ImageIcon> getImageHashMap() {
         return imageHashMap;
@@ -97,7 +89,7 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
 
     /**
      *
-     * @param filepath
+     * @param filepath - is the filepath for each sprite used in the game
      */
 
     public void populateHashMap(String filepath){
@@ -121,19 +113,13 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
     private void drawMap(){
         for (int i = 0; i < myElements.length; i++) {
             for (int j = 0; j < myElements.length; j++) {
-                //myElements[i][j].setText(tmpMap.getMyMap()[i][j].getSymbol());
-                //maybe put really big if statement in here (ie, if symbol = f, set image icon for floor
-                
+                //myElements[i][j].setText(tmpMap.getMyMap()[i][j].getSymbol());            
                 //myElements[i][j].setIcon(new ImageIcon(getClass().getResource(tmpMap.getMyMap()[i][j].getImgFileName())));
                
                 if(tmpMap.getMyMap()[i][j] != null){
                     populateHashMap(tmpMap.getMyMap()[i][j].getImgFileName());
                     myElements[i][j].setIcon(imageHashMap.get(tmpMap.getMyMap()[i][j].getImgFileName()));
                 }
-
-               
-                
-                
             } 
         }
      }
