@@ -13,16 +13,19 @@ public class Map {
 
     MapElement[][] myMap = new MapElement[12][12];
     int playerRow, playerCol;
-    int level = 1; //this will be ammended when loading through the levels, however it will also be used in a switch case statement to select maps
+    //int level = 1; //this will be ammended when loading through the levels, however it will also be used in a switch case statement to select maps
     
     
     
     
-    Map() {
+    Map(String mapNames) {
         //resetMap();
-        System.out.println(level);
+        //System.out.println(level);
         //level = 1;
-        readMap();
+        //String[] Maps = Game.getMapNames();
+        
+        
+        readMap(mapNames);
         // for (int i = 0; i < myMap.length; i++) {
         //   for (int j = 0; j < myMap.length; j++) {
         //     if (i == 0 || i == (myMap.length - 1) || j == 0 || j == (myMap.length - 1)) {
@@ -191,7 +194,47 @@ public class Map {
 
     }
 
-    public final void readMap() {
+    public final void readMap(String mapName) {
+        
+        InputStreamReader fileReader = new InputStreamReader(getClass().getResourceAsStream(mapName));
+                BufferedReader bufferReader = new BufferedReader(fileReader);
+                String line;
+                int i = 0;
+
+                try {
+
+                    while ((line = bufferReader.readLine()) != null) {
+                        for (int j = 0; j < line.length(); j++) {
+                            //for(int j = 0; j<line.length();j++){
+                            if (line.substring(j, j + 1).equals("X")) {
+                                myMap[i][j] = new Wall();
+                            } else if (line.substring(j, j + 1).equals("*")) {
+                                myMap[i][j] = new Crate();
+                                myMap[i][j].setUnderneath(new Floor());
+                            } else if (line.substring(j, j + 1).equals(" ")) {
+                                myMap[i][j] = new Floor();
+                            } else if (line.substring(j, j + 1).equals("@")) {
+                                myMap[i][j] = new Player();
+                                myMap[i][j].setUnderneath(new Floor());
+                                playerRow = i;
+                                playerCol = j;
+                            } else if (line.substring(j, j + 1).equals(".")) {
+                                myMap[i][j] = new Diamond();
+                                //myMap[i][j].setUnderneath(new Floor());
+                            } else {
+                                myMap[i][j] = new Wall();
+                            }
+                            //}
+                        }
+                        i++;
+                    }
+
+                } catch (IOException e) {
+                    System.out.println("ERROR: Map not read");
+                }
+        
+        
+        /*
         System.out.println("in readmap, level is:");
         System.out.println(level);
         switch (level) {
@@ -277,11 +320,11 @@ public class Map {
                 }
             }
 
-        }
+        } */
     }
 
-    public final void resetMap() {
-        readMap();
+    public final void resetMap(String mapName) {
+        //readMap();
         
         /*playerRow = 4;
         playerCol = 5;
@@ -334,8 +377,8 @@ public class Map {
                 }
             }
             }
-        level++;
-        System.out.println(level);
+        //level++;
+        //System.out.println(level);
         //readMap();
         return true;
 

@@ -18,9 +18,20 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
     private HashMap<String, ImageIcon> imageHashMap;
     //boolean hasWon = false;
     private boolean levelComplete;
+    private int level;
+    private String[] mapNames = {"/SokobanMaps/level1.txt", "/SokobanMaps/level2.txt", "/SokobanMaps/level3.txt"};
+
+    
+
+    
+    
+    
     
     public Game() {
         initComponents();
+        String[] mapNames = {"/SokobanMaps/level1.txt", "/SokobanMaps/level2.txt", "/SokobanMaps/level3.txt"};
+        int level;
+        
         imageHashMap = new HashMap<>();
         for (int i = 0; i < myElements.length; i++) { //When working with graphics, use myElements
             for (int j = 0; j < myElements.length; j++) {
@@ -31,11 +42,22 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
             }
             
         }
+        
+        
+        
+        level = 0;
         this.addKeyListener(this);
         setFocusable(true);
-        tmpMap = new Map();
+        tmpMap = new Map(mapNames[level]); //maybe pass map names and level through here?
         drawMap();
     }
+
+    public String[] getMapNames() {
+        return mapNames;
+    }
+    
+    
+    
 
     public boolean isLevelComplete() {
         return levelComplete;
@@ -203,6 +225,8 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
 
     @Override
     public void keyPressed(KeyEvent e) {
+       
+        
         
         if(e.getKeyChar() == 'w' || e.getKeyCode() == KeyEvent.VK_UP){
             tmpMap.movePlayer(1);
@@ -217,11 +241,29 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
             tmpMap.movePlayer(4);
             lbl_output.setText("You pressed Right");
         }  else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            tmpMap.resetMap();
+            if(levelComplete = true){
+                tmpMap.readMap(getMapNames()[level]);
+            } else{
+                tmpMap.resetMap(getMapNames()[level]);
+            }
         }
         //tmpMap.checkForWin();
         //boolean hasWon = tmpMap.checkForWin();
         //System.out.println(hasWon);
+         if (tmpMap.checkForWin()){
+            lbl_output.setText("You have won!");
+            levelComplete = true;
+            level++;
+                if(level == getMapNames().length){
+                    System.out.println("You won the game!");
+                    System.exit(0);
+                }
+            System.out.println(levelComplete);
+        }
+
+
+
+
         //if(hasWon != false){
           //  lbl_output.setText("You have Won!");
         //}
@@ -229,12 +271,14 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
         drawMap();
         
         //System.out.println(tmpMap.checkForWin());
-
+        
+        /*
         if (tmpMap.checkForWin()){
             lbl_output.setText("You have won!");
             levelComplete = true;
+            level++;
             System.out.println(levelComplete);
-        }
+        }*/
     }
 
     @Override
