@@ -11,6 +11,10 @@ import javax.swing.JLabel;
 import java.util.HashMap;
 import javax.swing.ImageIcon;
 
+/**
+ *
+ * @author Owen
+ */
 public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 on final vid: https://brightspace.uhi.ac.uk/d2l/le/content/374391/viewContent/3389172/View
 
     private JLabel [][] myElements = new JLabel[12][12];
@@ -21,12 +25,9 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
     private int level;
     private String[] mapNames = {"/SokobanMaps/level1.txt", "/SokobanMaps/level2.txt", "/SokobanMaps/level3.txt"};
 
-    
-
-    
-    
-    
-    
+    /**
+     *
+     */
     public Game() {
         initComponents();
         String[] mapNames = {"/SokobanMaps/level1.txt", "/SokobanMaps/level2.txt", "/SokobanMaps/level3.txt"};
@@ -52,22 +53,27 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
         drawMap();
     }
 
+    /**
+     *
+     * @return
+     */
     public String[] getMapNames() {
         return mapNames;
     }
     
-    
-    
-
+    /**
+     *
+     * @return
+     */
     public boolean isLevelComplete() {
         return levelComplete;
     }
 
-    
-    
-    
-    
-    
+    /**
+     *
+     * @param filename
+     * @return
+     */
     public ImageIcon getImage(String filename){
         //filename = MapElement.getImgFileName();
         //use mapelements display thingy here with the file path specified as variable filename
@@ -77,6 +83,10 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public HashMap<String, ImageIcon> getImageHashMap() {
         return imageHashMap;
     }
@@ -84,6 +94,11 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
     //public void setImageHashMap(HashMap<String, ImageIcon> imageHashMap) {
       //  this.imageHashMap = imageHashMap;
     //}
+
+    /**
+     *
+     * @param filepath
+     */
 
     public void populateHashMap(String filepath){
         if (imageHashMap.containsKey(filepath)){
@@ -220,9 +235,17 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
     private javax.swing.JPanel pnl_status;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     *
+     * @param e
+     */
     @Override
     public void keyTyped(KeyEvent e) {}
 
+    /**
+     *
+     * @param e
+     */
     @Override
     public void keyPressed(KeyEvent e) {
        
@@ -262,11 +285,6 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
         }
 
 
-
-
-        //if(hasWon != false){
-          //  lbl_output.setText("You have Won!");
-        //}
         
         drawMap();
         
@@ -281,6 +299,10 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
         }*/
     }
 
+    /**
+     *
+     * @param e
+     */
     @Override
     public void keyReleased(KeyEvent e) {}
 }

@@ -9,6 +9,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ *
+ * @author Owen
+ */
 public class Map {
 
     MapElement[][] myMap = new MapElement[12][12];
@@ -19,43 +23,23 @@ public class Map {
     
     
     Map(String mapNames) {
-        //resetMap();
-        //System.out.println(level);
-        //level = 1;
-        //String[] Maps = Game.getMapNames();
-        
-        
+               
         readMap(mapNames);
-        // for (int i = 0; i < myMap.length; i++) {
-        //   for (int j = 0; j < myMap.length; j++) {
-        //     if (i == 0 || i == (myMap.length - 1) || j == 0 || j == (myMap.length - 1)) {
-        //       myMap[i][j] = new Wall();
-        // } else {
-        //   myMap[i][j] = new Floor(); //put case/ifelse statement here to determine what goes where, ie if character = f, put floor etc. Reader would be implemented for the maps, and goes here.?
-        //}
-        // }
-        //}
-        //myMap[playerRow][playerCol] = new Player();
-        //myMap[playerRow][playerCol].setUnderneath(new Floor());
-        //myMap[9][5] = new Crate();
-        //myMap[9][5].setUnderneath(new Floor());
-        //myMap[4][8] = new Crate();
-        //myMap[4][8].setUnderneath(new Floor());
-        //myMap[3][7] = new Wall();
-        //myMap[7][3] = new Diamond();
-        //myMap[4][8] = new Diamond();
-        //myMap[3][4] = new Crate();
-        //myMap[3][4].setUnderneath(new Floor());
+      
     }
 
-    
-    
-   
-    
+    /**
+     *
+     * @return
+     */
     public MapElement[][] getMyMap() {
         return myMap;
     }
 
+    /**
+     *
+     * @param dir
+     */
     public void movePlayer(int dir) {
 
         switch (dir) {
@@ -158,21 +142,46 @@ public class Map {
         }
     }
 
+    /**
+     *
+     * @param x
+     * @param y
+     * @return
+     */
     public boolean isObstacleAhead(int x, int y) {
         //checks if the object ahead of the player is set to be an obstacle
         return myMap[x][y].isObs();
     }
 
+    /**
+     *
+     * @param x
+     * @param y
+     * @return
+     */
     public boolean isPushableObject(int x, int y) {
         //checks if the object ahead of the player can be pushed
         return myMap[x][y].isCanBePushed();
     }
 
+    /**
+     *
+     * @param x
+     * @param y
+     * @return
+     */
     public boolean isDestAhead(int x, int y) {
 
         return myMap[x][y].isIsDestination();
     }
 
+    /**
+     *
+     * @param currX
+     * @param currY
+     * @param newX
+     * @param newY
+     */
     public void move(int currX, int currY, int newX, int newY) {
         //the goal of this function is to have a universal move function that will reuse the loaded assets by moving the player (and pushable object if applicable) to the new space (newCol, newRow)
         MapElement currentUnderneath = myMap[currX][currY].getUnderneath();
@@ -194,6 +203,10 @@ public class Map {
 
     }
 
+    /**
+     *
+     * @param mapName
+     */
     public final void readMap(String mapName) {
         
         InputStreamReader fileReader = new InputStreamReader(getClass().getResourceAsStream(mapName));
@@ -234,128 +247,21 @@ public class Map {
                 }
         
         
-        /*
-        System.out.println("in readmap, level is:");
-        System.out.println(level);
-        switch (level) {
-            
-            case 1: {
-                System.out.println(level);
-                InputStreamReader fileReader = new InputStreamReader(getClass().getResourceAsStream("/SokobanMaps/level1.txt"));
-                BufferedReader bufferReader = new BufferedReader(fileReader);
-                String line;
-                int i = 0;
-
-                try {
-
-                    while ((line = bufferReader.readLine()) != null) {
-                        for (int j = 0; j < line.length(); j++) {
-                            //for(int j = 0; j<line.length();j++){
-                            if (line.substring(j, j + 1).equals("X")) {
-                                myMap[i][j] = new Wall();
-                            } else if (line.substring(j, j + 1).equals("*")) {
-                                myMap[i][j] = new Crate();
-                                myMap[i][j].setUnderneath(new Floor());
-                            } else if (line.substring(j, j + 1).equals(" ")) {
-                                myMap[i][j] = new Floor();
-                            } else if (line.substring(j, j + 1).equals("@")) {
-                                myMap[i][j] = new Player();
-                                myMap[i][j].setUnderneath(new Floor());
-                                playerRow = i;
-                                playerCol = j;
-                            } else if (line.substring(j, j + 1).equals(".")) {
-                                myMap[i][j] = new Diamond();
-                                //myMap[i][j].setUnderneath(new Floor());
-                            } else {
-                                myMap[i][j] = new Wall();
-                            }
-                            //}
-                        }
-                        i++;
-                    }
-
-                } catch (IOException e) {
-                    System.out.println("ERROR: Map not read");
-                }
-            }
-            
-            
-            case 2: {
-                System.out.println(level);
-                InputStreamReader fileReader = new InputStreamReader(getClass().getResourceAsStream("/SokobanMaps/level2.txt"));
-                BufferedReader bufferReader = new BufferedReader(fileReader);
-                String line;
-                int i = 0;
-
-                try {
-
-                    while ((line = bufferReader.readLine()) != null) {
-                        for (int j = 0; j < line.length(); j++) {
-                            //for(int j = 0; j<line.length();j++){
-                            if (line.substring(j, j + 1).equals("X")) {
-                                myMap[i][j] = new Wall();
-                            } else if (line.substring(j, j + 1).equals("*")) {
-                                myMap[i][j] = new Crate();
-                                myMap[i][j].setUnderneath(new Floor());
-                            } else if (line.substring(j, j + 1).equals(" ")) {
-                                myMap[i][j] = new Floor();
-                            } else if (line.substring(j, j + 1).equals("@")) {
-                                myMap[i][j] = new Player();
-                                myMap[i][j].setUnderneath(new Floor());
-                                playerRow = i;
-                                playerCol = j;
-                            } else if (line.substring(j, j + 1).equals(".")) {
-                                myMap[i][j] = new Diamond();
-                                //myMap[i][j].setUnderneath(new Floor());
-                            } else {
-                                myMap[i][j] = new Wall();
-                            }
-                            //}
-                        }
-                        i++;
-                    }
-
-                } catch (IOException e) {
-                    System.out.println("ERROR: Map not read");
-                }
-            }
-
-        } */
+       
     }
 
+    /**
+     *
+     * @param mapName
+     */
     public final void resetMap(String mapName) {
-        //readMap();
         
-        /*playerRow = 4;
-        playerCol = 5;
-        for (int i = 0; i < myMap.length; i++) {
-            for (int j = 0; j < myMap.length; j++) {
-
-                if (i == 0 || i == (myMap.length - 1) || j == 0 || j == (myMap.length - 1)) {
-
-                    myMap[i][j] = new Wall();
-                } else {
-                    myMap[i][j] = new Floor(); //put case/ifelse statement here to determine what goes where, ie if character = f, put floor etc. Reader would be implemented for the maps, and goes here.?
-                }
-            }
-
-        }
-
-        myMap[playerRow][playerCol] = new Player();
-        myMap[playerRow][playerCol].setUnderneath(new Floor());
-        myMap[7][3] = new Crate();
-        myMap[7][3].setUnderneath(new Floor());
-        myMap[2][2] = new Crate();
-        myMap[2][2].setUnderneath(new Floor());
-        myMap[4][8] = new Crate();
-        myMap[4][8].setUnderneath(new Floor());
-        myMap[6][9] = new Diamond();
-        myMap[5][9] = new Diamond();
-        myMap[4][2] = new Diamond();
-        myMap[5][5] = new Wall();
-        */
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean checkForWin() {
         MapElement tempCheck;
         MapElement tempUnderneath;
