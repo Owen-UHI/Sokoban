@@ -23,14 +23,14 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
     //boolean hasWon = false;
     private boolean levelComplete;
     private int level;
-    private String[] mapNames = {"/SokobanMaps/level1.txt", "/SokobanMaps/level2.txt", "/SokobanMaps/level3.txt"};
+    private String[] mapNames = {"/SokobanMaps/level1.txt", "/SokobanMaps/level2.txt", "/SokobanMaps/level3.txt", "/SokobanMaps/level4.txt", "/SokobanMaps/level5.txt"};
 
     /**
      *
      */
     public Game() {
         initComponents();
-        String[] mapNames = {"/SokobanMaps/level1.txt", "/SokobanMaps/level2.txt", "/SokobanMaps/level3.txt"};
+        String[] mapNames = {"/SokobanMaps/level1.txt", "/SokobanMaps/level2.txt", "/SokobanMaps/level3.txt", "/SokobanMaps/level4.txt", "/SokobanMaps/level5.txt"};
         int level;
         
         imageHashMap = new HashMap<>();
@@ -249,7 +249,7 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
     @Override
     public void keyPressed(KeyEvent e) {
        
-        
+        levelComplete = tmpMap.checkForWin();
         
         if(e.getKeyChar() == 'w' || e.getKeyCode() == KeyEvent.VK_UP){
             tmpMap.movePlayer(1);
@@ -275,7 +275,7 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
         //System.out.println(hasWon);
          if (tmpMap.checkForWin()){
             lbl_output.setText("You have won!");
-            levelComplete = true;
+            //levelComplete = true;
             level++;
                 if(level == getMapNames().length){
                     System.out.println("You won the game!");
