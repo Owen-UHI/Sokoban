@@ -17,6 +17,7 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
     private Map tmpMap;
     private HashMap<String, ImageIcon> imageHashMap;
     //boolean hasWon = false;
+    private boolean levelComplete;
     
     public Game() {
         initComponents();
@@ -36,6 +37,12 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
         drawMap();
     }
 
+    public boolean isLevelComplete() {
+        return levelComplete;
+    }
+
+    
+    
     
     
     
@@ -221,10 +228,12 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
         
         drawMap();
         
-        System.out.println(tmpMap.checkForWin());
+        //System.out.println(tmpMap.checkForWin());
 
         if (tmpMap.checkForWin()){
             lbl_output.setText("You have won!");
+            levelComplete = true;
+            System.out.println(levelComplete);
         }
     }
 

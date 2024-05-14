@@ -14,10 +14,14 @@ public class Map {
     MapElement[][] myMap = new MapElement[12][12];
     int playerRow, playerCol;
     int level = 1; //this will be ammended when loading through the levels, however it will also be used in a switch case statement to select maps
-
+    
+    
+    
+    
     Map() {
         //resetMap();
-
+        System.out.println(level);
+        //level = 1;
         readMap();
         // for (int i = 0; i < myMap.length; i++) {
         //   for (int j = 0; j < myMap.length; j++) {
@@ -41,6 +45,10 @@ public class Map {
         //myMap[3][4].setUnderneath(new Floor());
     }
 
+    
+    
+   
+    
     public MapElement[][] getMyMap() {
         return myMap;
     }
@@ -184,9 +192,54 @@ public class Map {
     }
 
     public final void readMap() {
+        System.out.println("in readmap, level is:");
+        System.out.println(level);
         switch (level) {
+            
             case 1: {
+                System.out.println(level);
                 InputStreamReader fileReader = new InputStreamReader(getClass().getResourceAsStream("/SokobanMaps/level1.txt"));
+                BufferedReader bufferReader = new BufferedReader(fileReader);
+                String line;
+                int i = 0;
+
+                try {
+
+                    while ((line = bufferReader.readLine()) != null) {
+                        for (int j = 0; j < line.length(); j++) {
+                            //for(int j = 0; j<line.length();j++){
+                            if (line.substring(j, j + 1).equals("X")) {
+                                myMap[i][j] = new Wall();
+                            } else if (line.substring(j, j + 1).equals("*")) {
+                                myMap[i][j] = new Crate();
+                                myMap[i][j].setUnderneath(new Floor());
+                            } else if (line.substring(j, j + 1).equals(" ")) {
+                                myMap[i][j] = new Floor();
+                            } else if (line.substring(j, j + 1).equals("@")) {
+                                myMap[i][j] = new Player();
+                                myMap[i][j].setUnderneath(new Floor());
+                                playerRow = i;
+                                playerCol = j;
+                            } else if (line.substring(j, j + 1).equals(".")) {
+                                myMap[i][j] = new Diamond();
+                                //myMap[i][j].setUnderneath(new Floor());
+                            } else {
+                                myMap[i][j] = new Wall();
+                            }
+                            //}
+                        }
+                        i++;
+                    }
+
+                } catch (IOException e) {
+                    System.out.println("ERROR: Map not read");
+                }
+            }
+            
+            
+            case 2: {
+                System.out.println(level);
+                InputStreamReader fileReader = new InputStreamReader(getClass().getResourceAsStream("/SokobanMaps/level2.txt"));
                 BufferedReader bufferReader = new BufferedReader(fileReader);
                 String line;
                 int i = 0;
@@ -228,7 +281,9 @@ public class Map {
     }
 
     public final void resetMap() {
-        playerRow = 4;
+        readMap();
+        
+        /*playerRow = 4;
         playerCol = 5;
         for (int i = 0; i < myMap.length; i++) {
             for (int j = 0; j < myMap.length; j++) {
@@ -255,7 +310,7 @@ public class Map {
         myMap[5][9] = new Diamond();
         myMap[4][2] = new Diamond();
         myMap[5][5] = new Wall();
-
+        */
     }
 
     public boolean checkForWin() {
@@ -279,7 +334,10 @@ public class Map {
                 }
             }
             }
-            return true;
+        level++;
+        System.out.println(level);
+        //readMap();
+        return true;
 
         }
     }
