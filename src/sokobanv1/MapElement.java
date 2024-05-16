@@ -14,8 +14,6 @@ public class MapElement {
     private boolean canBePushed;
     private boolean isDestination; //this is relating to the diamonds that the crates have to go to
     private boolean obs;
-    private int x;
-    private int y;
     private MapElement underneath;
 
     /**

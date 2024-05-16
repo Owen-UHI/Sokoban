@@ -14,21 +14,22 @@ import javax.swing.ImageIcon;
  *
  * @author Owen Ross
  */
-public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 on final vid: https://brightspace.uhi.ac.uk/d2l/le/content/374391/viewContent/3389172/View
+public class Game extends javax.swing.JFrame implements KeyListener {
 
     private JLabel [][] myElements = new JLabel[12][12];
     private Map tmpMap;
     private HashMap<String, ImageIcon> imageHashMap;
-    //boolean hasWon = false;
     private boolean levelComplete;
     private int level;
     private String[] mapNames = {"/SokobanMaps/level1.txt", "/SokobanMaps/level2.txt", "/SokobanMaps/level3.txt", "/SokobanMaps/level4.txt", "/SokobanMaps/level5.txt"};
-
+    private int playerMoves = 0;
+    
     /**
      *  This starts a new instance of the game, initialising the graphical representation of the game, handling the user input, tracking the level the user is on and holding the mapNames array, which is the filenames of the maps
      */
     public Game() {
         initComponents();
+        updateCount(playerMoves);
         String[] mapNames = {"/SokobanMaps/level1.txt", "/SokobanMaps/level2.txt", "/SokobanMaps/level3.txt", "/SokobanMaps/level4.txt", "/SokobanMaps/level5.txt"};
         int level;
         
@@ -62,30 +63,12 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
     
     /**
      *
-     * @return
+     * @return levelcomplete boolean
      */
     public boolean isLevelComplete() {
         return levelComplete;
     }
 
-    /**
-     *
-     * @param filename
-     * @return
-     */
-   
-
-    /**
-     *
-     * @return imageHashMap. This acts as the getter for the hashmap, allowing methods to populate it and access its contents
-     */
-    public HashMap<String, ImageIcon> getImageHashMap() {
-        return imageHashMap;
-    }
-
-    //public void setImageHashMap(HashMap<String, ImageIcon> imageHashMap) {
-      //  this.imageHashMap = imageHashMap;
-    //}
 
     /**
      *
@@ -103,12 +86,7 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
     
     }
     
-    
-    
 
-    
-    
-    
     
     private void drawMap(){
         for (int i = 0; i < myElements.length; i++) {
@@ -154,9 +132,9 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
             pnl_statusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_statusLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbl_output, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(lbl_output2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbl_output, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_output2, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         pnl_statusLayout.setVerticalGroup(
@@ -234,65 +212,65 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
     public void keyPressed(KeyEvent e) {
        
         levelComplete = tmpMap.checkForWin();
+        updateCount(playerMoves);
         
         if(e.getKeyChar() == 'w' || e.getKeyCode() == KeyEvent.VK_UP){
              if(levelComplete != false){
                 tmpMap.readMap(getMapNames()[level]);
+                playerMoves = 0;
+                updateCount(0);
             } else {
                 tmpMap.movePlayer(1);
                 lbl_output.setText("You pressed up");}
         } else if (e.getKeyChar() == 's'|| e.getKeyCode() == KeyEvent.VK_DOWN) {
                  if(levelComplete != false){
-                     tmpMap.readMap(getMapNames()[level]);
+                    tmpMap.readMap(getMapNames()[level]);
+                    playerMoves = 0;
+                    updateCount(0);
             } else {
                 tmpMap.movePlayer(2);
                 lbl_output.setText("You pressed down");}
         } else if (e.getKeyChar() == 'a'|| e.getKeyCode() == KeyEvent.VK_LEFT) {
              if(levelComplete != false){
                 tmpMap.readMap(getMapNames()[level]);
+                playerMoves = 0;
+                updateCount(0);
             } else {
                 tmpMap.movePlayer(3);
                 lbl_output.setText("You pressed left");}
         } else if (e.getKeyChar() == 'd'|| e.getKeyCode() == KeyEvent.VK_RIGHT) {
              if(levelComplete != false){
                 tmpMap.readMap(getMapNames()[level]);
+                playerMoves = 0;
+                updateCount(0);
             } else {
                 tmpMap.movePlayer(4);
                 lbl_output.setText("You pressed Right");}
         }  else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             if(levelComplete != false){
                 tmpMap.readMap(getMapNames()[level]);
+                playerMoves = 0;
+                updateCount(0);
             } else{
+                playerMoves = 0;
+                updateCount(0);
                 tmpMap.resetMap(getMapNames()[level]);
             }
         }
-        //tmpMap.checkForWin();
-        //boolean hasWon = tmpMap.checkForWin();
-        //System.out.println(hasWon);
+        
          if (tmpMap.checkForWin()){
-            lbl_output.setText("You have won this level! Please press spacebar for next level");
+            lbl_output.setText("You have won in "+Integer.toString(playerMoves)+" moves! Please press spacebar for next level");
+             System.out.println("You have won in "+Integer.toString(playerMoves)+" moves! Please press spacebar for next level");
             //levelComplete = true;
             level++;
                 if(level == getMapNames().length){
                     System.out.println("You won the game!");
                     System.exit(0);
                 }
-            System.out.println(levelComplete);
         }
-
-
-        
+       
         drawMap();
         
-        //System.out.println(tmpMap.checkForWin());
-        
-        /*
-        if (tmpMap.checkForWin()){
-            lbl_output.setText("You have won!");
-            levelComplete = true;
-            level++;
-            System.out.println(levelComplete);
-        }*/
     }
 
     /**
@@ -301,4 +279,20 @@ public class Game extends javax.swing.JFrame implements KeyListener {   //01:53 
      */
     @Override
     public void keyReleased(KeyEvent e) {}
+
+    /**
+     *
+     * @param count - counts the player's moves and shows them in a jlabel
+     */
+    public void updateCount(int count){
+        lbl_output2.setText("Number of moves is: " + Integer.toString(count));
+        playerMoves++;        
+    }
+
+
+
+
+
 }
+
+

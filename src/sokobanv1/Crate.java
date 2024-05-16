@@ -1,12 +1,12 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * 21005686
+ * Object Oriented Programming
  */
 package sokobanv1;
 
 /**
  *
- * @author Owen
+ * @author Owen Ross
  */
 public class Crate extends MapElement {
 

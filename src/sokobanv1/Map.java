@@ -199,11 +199,11 @@ public class Map {
 
     /**
      *
-     * @param mapName
+     * @param mapName is the filepath of a specific level, determined by the logic in game
      */
     public final void readMap(String mapName) {
         
-        InputStreamReader fileReader = new InputStreamReader(getClass().getResourceAsStream(mapName));
+                InputStreamReader fileReader = new InputStreamReader(getClass().getResourceAsStream(mapName));
                 BufferedReader bufferReader = new BufferedReader(fileReader);
                 String line;
                 int i = 0;
@@ -263,23 +263,15 @@ public class Map {
         for (MapElement[] myMap1 : myMap) {
 
             for (int j = 0; j < myMap.length; j++) {
-                //System.out.println("Before underneath");
                 tempCheck = myMap1[j];
                 if (tempCheck != null) {
                     tempUnderneath = myMap1[j].getUnderneath();
                     if (tempCheck.isCanBePushed() && !tempUnderneath.isIsDestination()) {
                         return false;
-                    } //else {
-                    // System.out.println("After checkforwin if else");
-                    //  return true;
-
-                    //}
+                    }
                 }
             }
-            }
-        //level++;
-        //System.out.println(level);
-        //readMap();
+        }
         return true;
 
         }
