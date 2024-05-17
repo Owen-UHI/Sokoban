@@ -34,7 +34,7 @@ public class Game extends javax.swing.JFrame implements KeyListener {
         int level;
         
         imageHashMap = new HashMap<>();
-        for (int i = 0; i < myElements.length; i++) { //When working with graphics, use myElements
+        for (int i = 0; i < myElements.length; i++) { 
             for (int j = 0; j < myElements.length; j++) {
                 myElements[i][j] = new JLabel();
                 //myElements[i][j].setText(".");
@@ -49,7 +49,7 @@ public class Game extends javax.swing.JFrame implements KeyListener {
         level = 0;
         this.addKeyListener(this);
         setFocusable(true);
-        tmpMap = new Map(mapNames[level]); //maybe pass map names and level through here?
+        tmpMap = new Map(mapNames[level]); //passing map name for a specific level through here
         drawMap();
     }
 
@@ -77,11 +77,11 @@ public class Game extends javax.swing.JFrame implements KeyListener {
 
     public void populateHashMap(String filepath){
         if (imageHashMap.containsKey(filepath)){
-            //lbl_output2.setText("Image already in memory");
+            
         } else {
             //imageHashMap.put(filepath, new ImageIcon((getClass().getResource(tmpMap.getMyMap()[i][j].getImgFileName()))));
             imageHashMap.put(filepath, new ImageIcon(getClass().getResource(filepath)));
-            //lbl_output2.setText("Image added to memory");
+            
         }
     
     }

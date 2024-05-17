@@ -212,7 +212,7 @@ public class Map {
 
                     while ((line = bufferReader.readLine()) != null) {
                         for (int j = 0; j < line.length(); j++) {
-                            //for(int j = 0; j<line.length();j++){
+                            
                             if (line.substring(j, j + 1).equals("X")) {
                                 myMap[i][j] = new Wall();
                             } else if (line.substring(j, j + 1).equals("*")) {
@@ -227,11 +227,11 @@ public class Map {
                                 playerCol = j;
                             } else if (line.substring(j, j + 1).equals(".")) {
                                 myMap[i][j] = new Diamond();
-                                //myMap[i][j].setUnderneath(new Floor());
+                                
                             } else {
                                 myMap[i][j] = new Wall();
                             }
-                            //}
+                            
                         }
                         i++;
                     }
