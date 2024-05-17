@@ -15,4 +15,8 @@ public class Player extends MapElement {
                 
     }
     
+    Player(String Symbol){
+        setSymbol(Symbol);
+    }
+    
 }
